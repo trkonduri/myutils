@@ -1,6 +1,9 @@
 import os
 import sys
 import resource
+import json
+import subprocess
+import pwd
 
 #print(os.path.realpath(__file__))
 
@@ -23,10 +26,25 @@ def mem_usage(tag):
         denom = denom**2
     print(f'INFO: memory used is at {tag} : {round(mem/denom,2)} MB')
 
+def beautify_json(file,outfile=None):
+    js = json.loads(open(file).read())
+    if outfile is None:
+        outfile=file
+    with open(outfile, 'w') as outfilep:
+        json.dump(js,outfilep,sort_keys=True,indent=4)
+
+def get_fuid(fileName):
+    return(pwd.getpwuid(os.stat(fileName).st_uid).pw_name)
+
+def execsh(command):
+    result = subprocess.run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+    return result.stdout
+
 if __name__ == "__main__":
     mem_usage("start")
     for a in list_files("./",(".py"), ("__init__")):
         print(a)
+        print(get_fuid(a))
     mem_usage("end")
 
 
