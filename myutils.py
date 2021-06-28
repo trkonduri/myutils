@@ -4,6 +4,8 @@ import resource
 import json
 import subprocess
 import pwd
+import datetime
+
 
 #print(os.path.realpath(__file__))
 
@@ -40,11 +42,22 @@ def execsh(command):
     result = subprocess.run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return result.stdout
 
+def mtimestamp(fileName):
+    t = os.path.getmtime(fileName)
+    return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H:%M")
+
+def ctimestamp(fileName):
+    t = os.path.getctime(fileName)
+    return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H:%M")
+
 if __name__ == "__main__":
     mem_usage("start")
     for a in list_files("./",(".py"), ("__init__")):
         print(a)
         print(get_fuid(a))
+    print(mtimestamp("myutils.py"))
+    print(ctimestamp("myutils.py"))
+
     mem_usage("end")
 
 
