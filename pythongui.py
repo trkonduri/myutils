@@ -7,7 +7,7 @@ import urllib.request
 WIDTH=500
 HEIGHT=600
 
-API_KEY = "22fae907b089b8f1732197bb568310d0"
+API_KEY = "api"
 url = "https://api.openweathermap.org/data/2.5/weather"
 
 def test_function(x):
