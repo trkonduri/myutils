@@ -50,6 +50,17 @@ def ctimestamp(fileName):
     t = os.path.getctime(fileName)
     return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H:%M")
 
+def force_link(src,linkName):
+    try:
+        os.symlink(src,linkName)
+    except:
+        if os.path.islink(linkName):
+            os.remove(linkName)
+            os.symlink(src,linkName)
+
+
+
+
 if __name__ == "__main__":
     mem_usage("start")
     for a in list_files("./",(".py"), ("__init__")):

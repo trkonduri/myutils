@@ -1,0 +1,21 @@
+# to remove newlines on every alternate line
+sed 'N;s/\n/\;/'
+
+# to print the content between to strings
+sed -n '/STRING1/,/STRING2/p' filename
+perl -i -ne'print unless /clk_bug/;' ?? will this work
+
+
+# map command in tcl
+set new [::struct::list mapfor x $line2 { expr {$x/4000.0}}]
+
+# send html emails
+mutt -e 'set content_type="text/html"' trkonduri@gmail.com -s "Some Subject" < <path to html file>
+
+#to change xterm title on linux machines
+echo -n "\003]0;${USER}@${HOST}\007"
+
+#to print per user usage
+find . -type f -printf '%u %k\n'|awk '{ arr[$1] += $2 } END { for i in arr ) { print i": " arr[i]/1024*1024)"G" } }' > du.txt
+
+
